@@ -7,16 +7,11 @@ class Solution:
         for key, value in freq.items() : 
             count[value].append(key)
         topk = []
-        # ; ind = len(nums)
         for x in range(len(nums), 0, -1) : 
             for num in count[x] : 
                 topk.append(num)
                 if len(topk) == k :
                     return topk
-        # while dupk != 0 :
-        #     topk += count[ind]
-        #     dupk -= len(count[ind])
-        #     ind -= 1
         return topk
     
         # topk = [l[0] for l in sorted(freq.items(), 
