@@ -1,14 +1,14 @@
 class Solution:
     def isValid(self, s: str) -> bool:
-        if len(s) == 1 : 
-            return False
         stack = []
-        pair = {')' : '(', '}' : '{', ']' : '['}
-        for i in s :
-            if i in pair.keys() and len(stack) >= 1 and stack[-1] == pair[i] : 
-                    stack.pop()
+        opposite = {')' : '(', ']' : '[', '}' : '{'}
+        
+        for i in s : 
+            if len(stack) == 0 : 
+                stack.append(i)
+            elif opposite.get(i, '') == stack[-1] :
+                stack.pop()
             else : 
                 stack.append(i)
-        if not stack : 
-            return True
-        return False    
+                
+        return len(stack) == 0
