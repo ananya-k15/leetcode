@@ -3,9 +3,7 @@ class Solution:
 
         def search_index(nums, left, right, target):
             # check whether there are any elements in the provided range
-            if right - left == 1:
-                return left if nums[left] == target else -1
-            elif right <= left:
+            if right <= left:
                 return -1
             # if yes, compute middle index
             else:
