@@ -1,19 +1,21 @@
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
 
-        def search_index(nums, left, right, target):
-            # check whether there are any elements in the provided range
-            if right <= left:
-                return -1
-            # if yes, compute middle index
+        left, right = 0, len(nums)
+
+        # loop runs while the index range is valid
+        while left < right:
+            # at each step, calculate a mid index
+            mid = (left + right) // 2
+            # if mid == target, return mid
+            if nums[mid] == target:
+                return mid
+            # if mid > target, discard the bigger half
+            elif nums[mid] > target:
+                right = mid
+            # if mid < target, discard the smaller half
             else:
-                m = (left + right) // 2
-                if target == nums[m]:
-                    return m
-                elif target < nums[m]:
-                    return search_index(nums, left, m, target)
-                else:
-                    return search_index(nums, m+1, right, target)
-        
-        return search_index(nums, 0, len(nums), target)
-            
+                left = mid+1
+                
+        # if loop finishes without returning, we couldn't find a solution, return -1
+        return -1
