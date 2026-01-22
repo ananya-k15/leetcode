@@ -6,18 +6,20 @@ class Solution:
             return False
         else:
             # create a dict which maps letter -> frequency for s
-            s_dict = dict()
+            counter = dict()
+            letters = set()
             for x in s:
-                s_dict[x] = s_dict.get(x, 0) + 1
+                counter[x] = counter.get(x, 0) + 1
+                letters.add(x)
             
             # then traverse t and use the same dictionary to check
             for y in t:
-                if y in s_dict.keys():
-                    s_dict[y] -= 1
+                if y in letters:
+                    counter[y] -= 1
                 else:
                     return False
             
-            for _, v in s_dict.items():
+            for _, v in counter.items():
                 if v != 0:
                     return False
             
