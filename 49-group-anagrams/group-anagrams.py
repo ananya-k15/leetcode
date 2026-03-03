@@ -34,7 +34,7 @@ class Solution:
                 freq[ord(letter)-97] += 1
 
             # check if anagrams aleady has this key
-            anagram_key = tuple(freq) # turn to a tuple since dictionary keys must be immutable
+            anagram_key = str(freq) # turn to a tuple since dictionary keys must be immutable
             # if so, add this word to the key's value
             # if not, add a new entry to anagrams
             anagram_value = anagrams.get(anagram_key, [])
