@@ -10,8 +10,8 @@ class Solution:
         # if the tree is empty or has no children, return 0/1
         if root == None:
             return 0
-        elif root.left == None and root.right == None:
-            return 1
+        # elif root.left == None and root.right == None:
+        #     return 1
 
         # get depth of left subtree
         left = self.maxDepth(root.left)
