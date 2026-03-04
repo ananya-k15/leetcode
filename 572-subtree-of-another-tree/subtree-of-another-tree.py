@@ -12,25 +12,25 @@ class Solution:
             if p is None and q is None:
                 return True
             # edgecase: only one tree is empty
-            elif p is None or q is None:
+            elif p is None or q is None or p.val != q.val:
                 return False
-            # check whether the root values match
-            root_check = p.val == q.val
             # recursively check whether the left and right subtrees are the same
             left_check = sameTree(p.left, q.left)
             right_check = sameTree(p.right, q.right)
             # if all conditions are satisfied, return True, else False
-            return root_check and left_check and right_check
+            return left_check and right_check
         
-        # edgecase: if both trees are empty, this is true by default
-        if root is None and subRoot is None:
-            return True
-        # edgecase: if root is empty, this is False by default
-        elif root is None:
-            return False
         # edgecase: if subtree is empty, this is true by default
-        elif subRoot is None:
+        if subRoot is None:
             return True
-        # for the current node, check whether the subTree starts from that node
+        # edgecase: if root is empty, this is false by default
+        if root is None:
+            return False
+        # # for the current node, check whether the subTree starts from that node
+        # if root.val == subRoot.val:
+        #     # if so, check whether the trees are the same
+        #     if sameTree(root, subRoot):
+        #         # if they're same, return True - we found a subtree!
+        #         return True
         # if not, check the left and right subtrees
         return sameTree(root, subRoot) or self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
