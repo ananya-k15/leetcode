@@ -6,33 +6,30 @@
 #         self.right = right
 class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        # to store diameter value
+        self.diameter = 0
         
-        # returns [diameter, height] of tree
-        def diameterAndHeight(root: Optional[TreeNode]) -> int:
+        # returns height of tree, and computes diameter in the process
+        def height(root: Optional[TreeNode]) -> int:
             
-            # if tree is empty, return [0, 0]
+            # edgecase: empty tree
+            # since we automatically count each subtree, 
+            # we use -1 to correct that assumption when the tree does not exist
             if root is None:
-                return [0, 0]
-            
-            # if it's a leaf node, return [0, 1]
-            if root.left is None and root.right is None:
-                return [0, 0]
+                return -1
 
-            # otherwise, find diameters of left and right subtrees
-            ld, lh = diameterAndHeight(root.left)
-            rd, rh = diameterAndHeight(root.right)
+            # otherwise, find height of left and right subtrees
+            lh = height(root.left)
+            rh = height(root.right)
 
-            # choose max of diameter(left subtree) OR diameter(right subtree)
-            # OR diameter formed by including current root node, i.e., 
-            # 1 + height of left subtree + height of right subtree
-            current_diam = 0
-            current_diam += lh + 1 if root.left is not None else 0
-            current_diam += rh + 1 if root.right is not None else 0
-
+            # find current height
             current_height = 1 + max(lh, rh)
 
-            max_diam = max(ld, rd, current_diam)
+            # diameter formed by passing through this root node
+            diameter = lh + rh + 2
+            self.diameter = max(self.diameter, diameter)
 
-            return [max_diam, current_height]
-
-        return diameterAndHeight(root)[0]
+            return current_height
+            
+        height(root)
+        return self.diameter
