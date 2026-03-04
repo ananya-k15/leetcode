@@ -17,7 +17,7 @@ class Solution:
 
         # we use bfs to find the level order
         # master list to store the levels
-        levelOrder = []
+        rightSideView = []
 
         # create a queue to store nodes during traversal
         queue = deque([ root ])
@@ -39,9 +39,9 @@ class Solution:
                     queue.append(node.right)
                 numLevelNodes -= 1
             # add the sublist to the master levelOrder list
-            levelOrder.append(level)
+            rightSideView.append(level[-1])
 
         # parse the levelOrder list to get the rightmost element at each level
-        rightSideView = [x[-1] for x in levelOrder]
+        # rightSideView = [x[-1] for x in levelOrder]
         # return the "right side view"
         return rightSideView
