@@ -32,10 +32,5 @@ class Solution:
         elif subRoot is None:
             return True
         # for the current node, check whether the subTree starts from that node
-        if root.val == subRoot.val:
-            # if so, check whether the trees are the same
-            if sameTree(root, subRoot):
-                # if they're same, return True - we found a subtree!
-                return True
         # if not, check the left and right subtrees
-        return self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
+        return sameTree(root, subRoot) or self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
