@@ -18,7 +18,6 @@ class Solution:
 
         # helper function: cloneNode
         def cloneNode(node):
-            # print(node.val, node.neighbors)
             # for every node in org graph p
             # check if we've already cloned p
             if node.val in seenNodes.keys():
@@ -27,18 +26,15 @@ class Solution:
             # if no, clone p and add it to the seenNodes hashmap
             newNode = Node(node.val, [])
             seenNodes[node.val] = newNode
-            # print(newNode, seenNodes)
             # for all neighbours of p
             if node.neighbors is not None:
                 for n in node.neighbors:
                     # call cloneNode and assign the result to the list
-                    m = cloneNode(n)
-                    # print("cloned node", m.val, m.neighbors, newNode.neighbors)
-                    temp = newNode.neighbors
-                    # return cloned node
-                    if temp is None:
-                        newNode.neighbors = [m]
-                    newNode.neighbors = temp + [m]
+                    newNode.neighbors.append(cloneNode(n))
+                    # m = cloneNode(n)
+                    # if newNode.neighbors is None:
+                    #     newNode.neighbors = [m]
+                    # newNode.neighbors = newNode.neighbors + [m]
             return newNode
 
         # call cloneNode on the first node
