@@ -30,11 +30,10 @@ class Solution:
             if node.neighbors is not None:
                 for n in node.neighbors:
                     # call cloneNode and assign the result to the list
-                    newNode.neighbors.append(cloneNode(n))
-                    # m = cloneNode(n)
+                    m = cloneNode(n)
                     # if newNode.neighbors is None:
                     #     newNode.neighbors = [m]
-                    # newNode.neighbors = newNode.neighbors + [m]
+                    newNode.neighbors = newNode.neighbors + [m]
             return newNode
 
         # call cloneNode on the first node
