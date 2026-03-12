@@ -6,7 +6,7 @@ class Solution:
         # We use a modified version of DFS to explore each island
         # It should return the number of 1's in the islands, i.e., area
         def explore(x, y):
-            nonlocal m, n, grid
+            # nonlocal m, n, grid
             # if indices are valid or it's a 1, 
             # explore all horizontal and vertical neighbors 
             if (x >= 0 and x < m) and (y >= 0 and y < n) and grid[x][y] == 1:
