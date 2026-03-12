@@ -8,7 +8,7 @@ class Solution:
             # if we hit an seen 1 or 0 -> return
             # if we hit invalid indices -> return
             if (x >= 0 and x < m) and (y >= 0 and y < n) and ((x, y) not in seen) and grid[x][y] == "1":
-                seen.add((x, y))
+                grid[x][y] = "0"
                 # if we hit an unseen 1 -> recursively explore that 1
                 explore(x+1,y)
                 explore(x,y+1)
@@ -25,14 +25,12 @@ class Solution:
         for i in range(0, m, 1):
             for j in range(0, n, 1):
                 # print(seen)
-                if grid[i][j] == "0" or (i, j) in seen:
+                if grid[i][j] == "0":
                     continue
                 # once we hit a one -> we've got an island
                 else:
                     # append islandCount
                     islandCount += 1
-                    if (i, j) in seen:
-                        continue
                     # explore all neighbours to check island area
                     # add all 1's discovered this way to a set of seen 1's
                     explore(i, j)
