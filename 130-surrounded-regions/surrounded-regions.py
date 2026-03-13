@@ -12,21 +12,18 @@ class Solution:
 
         def explore(x, y):
             nonlocal surrounded
-            # if (x, y) in surrounded:
-            #     return
             # check for invalid indices
-            if (0 <= x < m) and (0 <= y < n):
-                if board[x][y] == "O":
-                    surrounded.add((x, y))
-                    for dx, dy in dirs:
-                        nx, ny = x+dx, y+dy
-                        if (nx, ny) not in surrounded:
-                            explore(nx, ny)
-        
+            # if board[x][y] == "O":
+            surrounded.add((x, y))
+            for dx, dy in dirs:
+                nx, ny = x+dx, y+dy
+                if (0 <= nx < m) and (0 <= ny < n) and (nx, ny) not in surrounded and board[nx][ny] == "O":
+                    explore(nx, ny)
+    
         for i in range(m):
             for j in range(n):
                 if i == 0 or j == 0 or i == m-1 or j == n-1:
-                    if (i, j) not in surrounded:
+                    if (i, j) not in surrounded and board[i][j] == "O":
                         explore(i, j)
 
         for i in range(m):
