@@ -1,27 +1,25 @@
 class Solution:
     def isValid(self, s: str) -> bool:
-        # start an empty stack
+        # use a stack to track parentheses
         stack = []
-        matching = {'}':'{', ']':'[', ')':'('}
+        # use a dict to look up parenthesis pairs
+        pairs = {']':'[', '}':'{', ')':'('}
 
-        # for each letter x in s
         for x in s:
-            # if x is a starting parenthesis, 
-            if x in '([{':
+            # if x is an opening parenthesis
+            if x in "({[":
                 # add it to the stack
                 stack.append(x)
-            # otherwise, check whether the last letter matches the closing parentheses
-            elif len(stack) > 0 and matching.get(x, "") == stack[-1]:
-                # if so, pop the last letter 
-                stack.pop()
-            # if not, return invalid
+            # if it's a closing parenthesis
             else:
-                return False
+                # get the equivalent pair from pairs dict
+                opening = pairs[x]
+                # check if it's at the top of the stack
+                if len(stack) > 0 and stack[-1] == opening:
+                    stack.pop()
+                # if not, we've found an invalid sequence
+                else:
+                    return False
 
-        # if the loop ends successfully and the stack is empty
-        if stack == [] :
-            # return valid
-            return True
-        
-        # otherwise invalid
-        return False
+        # if stack is empty, the sequence was valid
+        return len(stack) == 0
