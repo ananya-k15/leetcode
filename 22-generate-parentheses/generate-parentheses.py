@@ -14,9 +14,11 @@ class Solution:
             # if open == close == n -> we have a valid solution
             if op == cl == n:
                 results.append(paren)
+                return
             # otherwise, we can try adding a open and close parenthesis
             possible(op + 1, cl, paren + '(')
             possible(op, cl + 1, paren + ')')
+
             return
 
         possible(0, 0, '')
