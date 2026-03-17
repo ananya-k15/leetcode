@@ -9,10 +9,9 @@ class Solution:
         for i in range(1, h, 1):
             r[i] = max(height[i-1], r[i-1])
 
-        minVal = [min(l[x], r[x]) for x in range(h)]
         water = 0
         for ind in range(h):
-            diff = minVal[ind] - height[ind]
+            diff = min(l[ind], r[ind]) - height[ind]
             if diff > 0:
                 water += diff
         return water
