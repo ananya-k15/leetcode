@@ -8,7 +8,7 @@ class Solution:
             area = min(height[i], height[j]) * (j-i)
             maxArea = max(area, maxArea)
 
-            if height[i] < height[j]:
+            if height[i] <= height[j]:
                 i += 1
             else:
                 j -= 1
