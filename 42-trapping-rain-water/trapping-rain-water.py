@@ -1,6 +1,8 @@
 class Solution:
     def trap(self, height: List[int]) -> int:
         h = len(height)
+        if h == 0:
+            return h
         # compute the greatest value to the left and right of each index
         l = [0] * h
         for j in range(h-2, -1, -1):
