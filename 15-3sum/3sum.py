@@ -16,7 +16,7 @@ class Solution:
                 break
             
             j, k = i+1, len(nums)-1
-            while j < k and k < len(nums):
+            while j < k:
                 if nums[j] + nums[k] + nums[i] == 0:
                     results.add((nums[i], nums[j], nums[k]))
                     j += 1
