@@ -7,9 +7,9 @@ class Solution:
         while i <= j and j < len(prices):
             day = prices[j] - prices[i]
             if day < 0:
-                i += 1
+                i = j
             else:
                 profit = max(profit, day)
-                j += 1
+            j += 1
         
         return profit
