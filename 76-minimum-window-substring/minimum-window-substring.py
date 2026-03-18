@@ -7,8 +7,8 @@ class Solution:
         tcount = Counter(t)
         scount = Counter()
         minSubstring = ""
-        if scount == tcount:
-            return s[:n]
+        # if scount == tcount:
+        #     return s[:n]
         l = 0
         for r in range(m):
             scount[s[r]] += 1
