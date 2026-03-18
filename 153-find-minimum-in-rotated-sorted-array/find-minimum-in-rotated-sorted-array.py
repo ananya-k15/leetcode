@@ -18,9 +18,7 @@ class Solution:
             elif nums[l] <= nums[mid]:
                 l = mid + 1
             # right side is sorted, look in the left side
-            elif nums[mid] <= nums[r]:
-                r = mid
             else:
-                print("what could this be", l, r, mid)
+                r = mid
         
         return nums[l]
