@@ -11,7 +11,6 @@ class Solution:
         # Use slow and fast pointers to find the midpoint
         slow = fast = head
         while fast and fast.next:
-            print("here")
             slow = slow.next
             fast = fast.next.next
         mid = slow.next
