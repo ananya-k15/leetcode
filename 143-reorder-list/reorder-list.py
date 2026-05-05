@@ -26,22 +26,25 @@ class Solution:
             curr.next = prev
             prev, curr = curr, temp
 
-        list2 = prev
-        list1 = head
+        head2 = prev
 
         # Merge the two lists
-        dummy = mlist = ListNode()
-        flip = 1
-        while list1 and list2:
-            if flip == 1:
-                mlist.next = list1
-                list1 = list1.next
-                flip = 0
-            else:
-                mlist.next = list2
-                list2 = list2.next
-                flip = 1
-            mlist = mlist.next
-        mlist.next = list1 or list2
+        while head2:
+            temp1, temp2 = head.next, head2.next
+            head.next = head2
+            head2.next = temp1
+            head, head2 = temp1, temp2
 
-        return dummy.next
+        # dummy = mlist = ListNode()
+        # flip = 1
+        # while list1 and list2:
+        #     if flip == 1:
+        #         mlist.next = list1
+        #         list1 = list1.next
+        #         flip = 0
+        #     else:
+        #         mlist.next = list2
+        #         list2 = list2.next
+        #         flip = 1
+        #     mlist = mlist.next
+        # mlist.next = list1 or list2
