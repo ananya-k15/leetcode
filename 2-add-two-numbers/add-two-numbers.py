@@ -15,8 +15,9 @@ class Solution:
             v2 = l2.val if l2 else 0
 
             new = v1 + v2 + carry
-            new, carry = int(new % 10), int(new // 10)
-            
+            carry = new // 10
+            new = new % 10
+
             cur.next = ListNode(new)
 
             cur = cur.next
