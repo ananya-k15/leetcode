@@ -9,9 +9,6 @@ class Solution:
         Do not return anything, modify head in-place instead.
         """
 
-        if head.next is None:
-            return head
-
         # Find the end of the list using slow/fast pointers
         mid, end = head, head
         while end.next and end.next.next:
@@ -23,8 +20,7 @@ class Solution:
         mid.next = None
 
         # Reverse the second half of the linked list
-        prev, curr = head2, head2.next
-        prev.next = None
+        prev, curr = None, head2
         while curr is not None:
             temp = curr.next
             curr.next = prev
