@@ -6,16 +6,22 @@
 #         self.right = right
 class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
-
-        # if the tree is empty or has no children, return 0/1
-        if root == None:
+        if root is None:
             return 0
-        # elif root.left == None and root.right == None:
-        #     return 1
 
-        # get depth of left subtree
-        left = self.maxDepth(root.left)
-        # get depth of right subtree
-        right = self.maxDepth(root.right)
-        # return max of those + 1
-        return 1 + max(left, right)
+        # we'll use dfs to track the maximum depth
+        # stack to store (node, depth)
+        stack = [(root, 1)]
+        mDepth = 0
+        while stack != []:
+            node, depth = stack.pop()
+            if node.left is not None:
+                stack.append((node.left, depth+1))
+            if node.right is not None:
+                stack.append((node.right, depth+1))
+            if depth > mDepth:
+                mDepth = depth
+
+        return mDepth
+        
+        
