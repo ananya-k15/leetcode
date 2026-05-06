@@ -6,10 +6,10 @@
 #         self.right = right
 class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
-        
         # Use inorder traversal, it visits the nodes in sorted order
         counter = k
         res = root.val
+        
         def dfs(node):
             nonlocal counter, res
 
