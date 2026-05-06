@@ -20,7 +20,6 @@ class Solution:
 
             lh, rh = height(node.left), height(node.right)
             diameter = max(lh + rh + 2, lh + 1, rh + 1)
-            print(diameter)
             if diameter > maxDiameter:
                 maxDiameter = diameter
             return max(lh, rh) + 1
