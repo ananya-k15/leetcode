@@ -8,28 +8,23 @@ import math
 #         self.right = right
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        # the default range is between -infinity, infinity
-        MAX, MIN = math.inf, -math.inf
-        # a stack to store all the nodes
-        stack = [[root, [MIN, MAX]]]
-        # until the stack is empty
+        MIN, MAX = -math.inf, math.inf
+
+        # root can be between +ve and -ve infinity
+        # left subtree can have values between [parent's left range, parent.val]
+        # left subtree can have values between [parent.val, parent's right range]
+        # all ranges are non-inclusive
+
+        # dfs with modified stack (contains allowed range of values)
+        stack = [[root, MIN, MAX]]
+
         while stack != []:
-            # check if the node satisfies conditions 1 and 2
-            node, valid = stack.pop()
-            if node.val <= valid[0] or node.val >= valid[1]:
+            node, low, high = stack.pop()
+            if node.val <= low or node.val >= high:
                 return False
-            # if the left subtree exists, is it's value less than the current node's value?
             if node.left is not None:
-                # form a custom range for the nodes in the left subtree
-                customRange = [valid[0], node.val] 
-                # add the left child to the stack with the custom range
-                stack.append([node.left, customRange])
-            # if the right subtree exists, is it's value greater than the current node's value?
+                stack.append([node.left, low, node.val])
             if node.right is not None:
-                customRange = [node.val, valid[1]]
-                stack.append([node.right, customRange])
+                stack.append([node.right, node.val, high])
+            
         return True
-
-
-
-
