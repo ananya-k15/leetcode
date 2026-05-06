@@ -6,52 +6,24 @@
 #         self.right = right
 class Solution:
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
-        # # helper function to check whether two trees are the same
-        # def sameTree(p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
-        #     # edgecase: both trees are empty
-        #     if p is None and q is None:
-        #         return True
-        #     # edgecase: only one tree is empty
-        #     elif p is None or q is None or p.val != q.val:
-        #         return False
-        #     # recursively check whether the left and right subtrees are the same
-        #     left_check = sameTree(p.left, q.left)
-        #     right_check = sameTree(p.right, q.right)
-        #     # if all conditions are satisfied, return True, else False
-        #     return left_check and right_check
         
-        # # edgecase: if subtree is empty, this is true by default
-        # if subRoot is None:
-        #     return True
-        # # edgecase: if root is empty, this is false by default
-        # if root is None:
-        #     return False
-        # # # for the current node, check whether the subTree starts from that node
-        # # if root.val == subRoot.val:
-        # #     # if so, check whether the trees are the same
-        # #     if sameTree(root, subRoot):
-        # #         # if they're same, return True - we found a subtree!
-        # #         return True
-        # # if not, check the left and right subtrees
-        # return sameTree(root, subRoot) or self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
+        def isSameTree(p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+            if p is None and q is None:
+                return True
+            elif p is None or q is None:
+                return False
+            else:
+                return p.val == q.val and isSameTree(p.left, q.left) and isSameTree(p.right, q.right)
 
-        if not subRoot:
-            return True
-        if not root:
-            return False
-        
-        # Your smart optimization: cheap filter first!
-        if root.val == subRoot.val and self.sameTree(root, subRoot):
-            return True
-        
-        return (self.isSubtree(root.left, subRoot) or 
-                self.isSubtree(root.right, subRoot))
+        stack = [root]
 
-    def sameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
-        if not p and not q:
-            return True
-        if not p or not q or p.val != q.val:  # Early termination here
-            return False
-        
-        return (self.sameTree(p.left, q.left) and 
-                self.sameTree(p.right, q.right))
+        while stack != []:
+            node = stack.pop()
+            if node is None:
+                continue
+            if node.val == subRoot.val and isSameTree(node, subRoot):
+                return True
+            stack.append(node.left)
+            stack.append(node.right)
+
+        return False
