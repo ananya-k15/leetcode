@@ -12,16 +12,20 @@ class Solution:
         res = root.val
         def dfs(node):
             nonlocal counter, res
-            if node.left is not None:
-                dfs(node.left)
+
+            if node is None:
+                return
+
+            dfs(node.left)
+
             if counter == 0:
                 return
             counter -= 1
             if counter == 0:
                 res = node.val
                 return
-            if node.right is not None:
-                dfs(node.right)
+
+            dfs(node.right)
 
         dfs(root)
         return res
