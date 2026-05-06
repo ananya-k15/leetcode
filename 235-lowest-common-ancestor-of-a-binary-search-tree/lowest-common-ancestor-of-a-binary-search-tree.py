@@ -7,31 +7,20 @@
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        
+        # let's say we'll switch p & q such that p < q 
+        # then the LCA must satify p < LCA < q 
+        # we traverse the tree, moving down left/right
+        # depenfing on whether LCA > p, q or LCA < p, q
 
-        # create a variable to hold the current node
+        low = min(p.val, q.val)
+        high = max(p.val, q.val)
         current = root
 
-        # if the node exists
         while current is not None:
-            if p.val > current.val and q.val > current.val:
-                current = current.right
-            elif p.val < current.val and q.val < current.val:
+            if current.val >= low and current.val <= high:
+                return current
+            elif current.val > high:
                 current = current.left
             else:
-                return current
-
-        # # We need to compute min(p, q) and max(p, q)
-        # pq_min = min(p.val, q.val)
-        # pq_max = max(p.val, q.val)
-
-        # # if pq_min > root.value, look in the right subtree
-        # if pq_min > root.val:
-        #     return self.lowestCommonAncestor(root.right, p, q)
-
-        # # if pq_max < root.value, look in the left subtree
-        # if pq_max < root.val:
-        #     return self.lowestCommonAncestor(root.left, p, q)
-
-        # # otherwise, pq_min <= root.value <= pq_max
-        # # the root is the LCA
-        # return root
+                current = current.right
