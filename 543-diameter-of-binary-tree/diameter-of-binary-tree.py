@@ -5,32 +5,27 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        # to store diameter value
+    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:   
         maxDiameter = 0
-        
-        # returns height of tree, and computes diameter in the process
-        def height(root: Optional[TreeNode]) -> int:
+        # use a helper function to perform dfs 
+        def height(node: Optional[TreeNode]) -> None:
             nonlocal maxDiameter
-
-            # edgecase: empty tree
-            # since we automatically count each subtree, 
-            # we use -1 to correct that assumption when the tree does not exist
-            if root is None:
+            if node is None:
                 return -1
 
-            # otherwise, find height of left and right subtrees
-            lh = height(root.left)
-            rh = height(root.right)
+            # at each node, we have two options:
+            # either the maxDiameter passes through the current node
+            # or the maxDiameter is the height of a subtree, depending on:
+            # height(left) + height(right) + 2 > height(left/right) + 1
 
-            # find current height
-            current_height = 1 + max(lh, rh)
-
-            # diameter formed by passing through this root node
-            diameter = lh + rh + 2
-            maxDiameter = max(maxDiameter, diameter)
-
-            return current_height
+            lh, rh = height(node.left), height(node.right)
+            diameter = max(lh + rh + 2, lh + 1, rh + 1)
+            print(diameter)
+            if diameter > maxDiameter:
+                maxDiameter = diameter
+            return max(lh, rh) + 1
 
         height(root)
         return maxDiameter
+
+
