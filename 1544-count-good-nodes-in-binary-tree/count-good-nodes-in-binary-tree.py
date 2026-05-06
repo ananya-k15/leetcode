@@ -6,30 +6,20 @@
 #         self.right = right
 class Solution:
     def goodNodes(self, root: TreeNode) -> int:
-        
-        # We can use a modified version of DFS to complete this
-        # As we explore each path to a node, we can keep track of 
-        # the maximum element we've encountered till that node, and 
-        # compare any new neighbours to that node's max value
 
-        # create a custom stack that stores [node, max value till that node]
+        # use a modified stack during dfs to keep 
+        # track of max element seen so far
         stack = [[root, root.val]]
-        goodNodes = 0
+        good = 0
 
         while stack != []:
-            # pop a node from the stack and it's max value so far
             node, maxSoFar = stack.pop()
-
-            # check whether the current node is a good node
             if node.val >= maxSoFar:
-                # modify maxSoFar
+                good += 1
                 maxSoFar = node.val
-                goodNodes += 1
-            
-            # add all children of node to the back of the stack
             if node.left is not None:
                 stack.append([node.left, maxSoFar])
             if node.right is not None:
                 stack.append([node.right, maxSoFar])
 
-        return goodNodes
+        return good
