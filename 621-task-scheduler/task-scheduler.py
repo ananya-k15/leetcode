@@ -17,7 +17,9 @@ class Solution:
         time = 0
         while len(heap) > 0 or len(queue) > 0:
             time += 1
-            if heap != []:
+            if heap == []:
+                time = queue[0][0]
+            else:
                 # remove most frequent task from queue
                 freq = heapq.heappop(heap)
                 # if freq left, add it to queue with add back time
