@@ -14,8 +14,6 @@ class KthLargest:
             heapq.heappop(self.heap)
 
     def add(self, val: int) -> int:
-        if self.heap is None:
-            heapq.heapify(self.heap)
         heapq.heappush(self.heap, val)
         if len(self.heap) > self.size:
             heapq.heappop(self.heap)
