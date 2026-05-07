@@ -8,7 +8,7 @@ class Solution:
         heapq.heapify(heap)
 
         for x, y in points:
-            dist = -1 * sqrt(x**2 + y**2)
+            dist = -1 * (x**2 + y**2)
             heapq.heappush(heap, (dist, [x, y]))
             if len(heap) > k:
                 heapq.heappop(heap)
