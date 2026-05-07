@@ -12,6 +12,7 @@ class Solution:
             nonlocal board, visited
             if x >= 0 and x < m and y >= 0 and y < n and (x, y) not in visited and board[x][y] == "O":
                 visited.add((x, y))
+                board[x][y] = "T"
                 for dx, dy in neighbours:
                     surround(x + dx, y + dy)
 
@@ -29,7 +30,9 @@ class Solution:
 
         for u in range(0, m):
             for v in range(0, n):
-                if (u, v) not in visited:
+                if board[u][v] == "T":
+                    board[u][v] = "O"
+                else:
                     board[u][v] = "X"
 
         
