@@ -1,31 +1,21 @@
 class Solution:
     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
-        maxIslandArea = 0 # default case
         m, n = len(grid), len(grid[0])
-
-        # We use a modified version of DFS to explore each island
-        # It should return the number of 1's in the islands, i.e., area
-        def explore(x, y):
-            # nonlocal m, n, grid
-            # if indices are valid or it's a 1, 
-            # explore all horizontal and vertical neighbors 
-            if (x >= 0 and x < m) and (y >= 0 and y < n) and grid[x][y] == 1:
-                # mark this as 0 since we've visited it!
+        neighbours = [[0, 1], [0, -1], [1, 0], [-1, 0]]
+        visited = set()
+        def dfs(x, y):
+            area = 0
+            if x >= 0 and x < m and y >= 0 and y < n and (x, y) not in visited and grid[x][y] == 1:
+                visited.add((x, y))
                 grid[x][y] = 0
-                # return 1 + sum of 1's from neighbor exploration
-                return 1 + explore(x+1, y) + explore(x-1, y) + explore(x, y+1) + explore(x, y-1)
-            # otherwise return 0
-            return 0
-        
-        # Traverse the entire grid
-        for i in range(0, m, 1):
-            for j in range(0, n, 1):
-                # When we hit an island, i.e, a '1'
+                area += 1
+                for dx, dy in neighbours:
+                    area += dfs(x + dx, y + dy)
+            return area
+        maxArea = 0
+        for i in range(0, m):
+            for j in range(0, n):
                 if grid[i][j] == 1:
-                    # Call explore to get island's area
-                    area = explore(i, j)
-                    # Compare this island to the maxIslandArea
-                    maxIslandArea = max(maxIslandArea, area)
-
-        # return max island area
-        return maxIslandArea
+                    area = dfs(i, j)
+                    maxArea = max(maxArea, area)
+        return maxArea
