@@ -5,7 +5,7 @@ class Solution:
         # to keep track of the k closest points
 
         heap = []
-        heapq.heapify(heap)
+        # heapq.heapify(heap)
 
         for x, y in points:
             dist = -1 * (x**2 + y**2)
