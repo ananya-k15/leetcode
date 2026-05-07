@@ -10,8 +10,7 @@ class Solution:
         for x, y in points:
             dist = -1 * sqrt(x**2 + y**2)
             heapq.heappush(heap, (dist, [x, y]))
-        
-        while len(heap) > k:
-            removed = heapq.heappop(heap)
+            if len(heap) > k:
+                heapq.heappop(heap)
         
         return [x[1] for x in heap]
