@@ -17,14 +17,12 @@ class Solution:
 
         def backtrack(ind, current):
             if len(current) == n:
-                results.append(current)
-                return
-            if ind >= n:
+                results.append("".join(current))
                 return
             for ch in letMap[digits[ind]]:
-                current += ch
+                current.append(ch)
                 backtrack(ind+1, current)
-                current = current[:-1]
+                current.pop()
 
-        backtrack(0, "")
+        backtrack(0, [])
         return results
