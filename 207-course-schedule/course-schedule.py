@@ -5,27 +5,23 @@ class Solution:
         for c, prereq in prerequisites:
             courseMap[c].append(prereq)
 
-        courses = [x for x in range(numCourses)]
         safe = set()
         visiting = set()
         
         def explore(course):
             if course in safe:
                 return True
+            if course in visiting:
+                return False
             visiting.add(course)
             for prereq in courseMap[course]:
-                if prereq in visiting or explore(prereq) == False:
+                if not explore(prereq):
                     return False
             visiting.remove(course)
+            safe.add(course)
             return True
 
-        for c in courses:
-            if explore(c):
-                safe.add(c)
-            else:
-                return False
-
-        return True
+        return all(explore(c) for c in range(numCourses))
 
             
 
