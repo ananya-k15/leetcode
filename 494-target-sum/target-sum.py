@@ -9,16 +9,10 @@ class Solution:
             if key in memo:
                 return memo[key]
             if ind < 0:
-                if target == 0:
-                    return 1
-                else:
-                    return 0
+                return 1 if target == 0 else 0
             res = 0
-            if nums[ind] == 0:
-                res = helper(ind-1, target, memo) * 2
-            else:
-                res += helper(ind-1, target - nums[ind], memo)
-                res += helper(ind-1, target + nums[ind], memo)
+            res += helper(ind-1, target - nums[ind], memo)
+            res += helper(ind-1, target + nums[ind], memo)
             memo[key] = res
             return res
 
