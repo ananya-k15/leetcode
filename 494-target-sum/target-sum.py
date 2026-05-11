@@ -9,6 +9,7 @@ class Solution:
             if key in memo:
                 return memo[key]
             if ind < 0:
+                memo[key] = 1 if target == 0 else 0
                 return 1 if target == 0 else 0
             res = 0
             res += helper(ind-1, target - nums[ind], memo)
