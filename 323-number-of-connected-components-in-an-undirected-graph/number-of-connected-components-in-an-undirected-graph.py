@@ -6,19 +6,19 @@ class Solution:
             adjacencyList[u].append(v)
             adjacencyList[v].append(u)
 
-        stack = []
         components = 0
         seen = set()
 
         for v in range(n):
             if v in seen:
                 continue
-            stack.append(v)
+            seen.add(v)
+            stack = [v]
             while stack != []:
                 u = stack.pop()
-                seen.add(u)
                 for neighbour in adjacencyList[u]:
                     if neighbour not in seen:
+                        seen.add(neighbour)
                         stack.append(neighbour)
             components += 1
 
